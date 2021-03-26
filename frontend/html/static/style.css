@@ -1,0 +1,8 @@
+* { margin:0; padding:0; box-sizing: border-box; }
+
+header { background-color: lightseagreen; padding: 5%;  }
+
+.dropper { margin: 2,5,0,5;  border: lightslategrey; border-style:dotted; padding-left: 10%; }
+
+
+footer { position: fixed; bottom: 0; padding-left: 3%; }
