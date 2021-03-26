@@ -1,8 +1,10 @@
 * { margin:0; padding:0; box-sizing: border-box; }
 
-header { background-color: lightseagreen; padding: 5%;  }
+h1,h2,p { font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif}
 
-.dropper { margin: 2,5,0,5;  border: lightslategrey; border-style:dotted; padding-left: 10%; }
+header { background-color:lightseagreen; padding: 5%;  }
+
+.dropper {border: lightslategrey; border-style:dotted; height: 75px; }
 
 
-footer { position: fixed; bottom: 0; padding-left: 3%; }
+footer { padding-left: 3%; }

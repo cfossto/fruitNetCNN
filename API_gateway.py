@@ -1,6 +1,4 @@
 from flask import Flask
-from flask import render_template
-import os
 
 app = Flask(__name__,static_folder="static")
 port = 9999
