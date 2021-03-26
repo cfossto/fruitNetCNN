@@ -1,4 +1,5 @@
 import numpy as np
+from Backend.CNN.Activation_Functions import Softmax
 
 class Loss:
 
@@ -25,7 +26,7 @@ class Loss:
 
         return data_loss
 
-class CategoricalCrossentropy:
+class CategoricalCrossentropy(Loss):
     def forward(self, y_pred, y_true):
         labels = len(y_pred[0])
 
@@ -49,3 +50,30 @@ class CategoricalCrossentropy:
         self.dinputs = -y_true / dvalues
         self.dinputs = self.dinputs / samples
 
+# Kan i vissa fall göra processen mer effektiv genom att kombinera
+# Softmax Aktivering och Categorical Cross entopy loss
+class Act_Softmax_Loss_CCentropy():
+    def __init__(self):
+        self.activation = Softmax()
+        self.output = CategoricalCrossentropy()
+
+    def forward(self, inputs, y_true):
+        # output-lagrets aktiverings funktion
+        self.activation.forward(inputs)
+        self.output = self.activation.output
+        # Retunera loss
+        return self.loss.calculate(self.out, y_true)
+
+    def backward(self, dvalues, y_true):
+        samples = len(dvalues)
+
+        # Om våra labels är one-hot encoded så omvandlas de till diskreta värden
+        if len(y_true.shape) == 2:
+            y_true = np.argmax(y_true, axis=1)
+
+        # Gör kopia av indatan för modifiering
+        self.dinputs = dvalues.copy()
+        self.dinputs[range(samples), y_true] -= 1
+        # Normalisera
+        self.dinputs = self.dinputs / samples
+        
