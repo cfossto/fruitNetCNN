@@ -55,7 +55,7 @@ class CategoricalCrossentropy(Loss):
 class Act_Softmax_Loss_CCentropy():
     def __init__(self):
         self.activation = Softmax()
-        self.output = CategoricalCrossentropy()
+        self.loss = CategoricalCrossentropy()
 
     def forward(self, inputs, y_true):
         # output-lagrets aktiverings funktion
