@@ -174,3 +174,10 @@ class Dropout_layer:
 
     def backward(self, dvalues):
         self.dinputs = dvalues * self.binary_mask
+
+# Lager som är nödvändigt för training men tom output.
+# Training bygger på data från föregående lager men första lager
+# har ej ett föregående lager. Hence
+class Layer_Input:
+    def forward(self, inputs):
+        self.output = inputs

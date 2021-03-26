@@ -6,25 +6,29 @@ class Loss:
     def regularization_loss(self, layer):
         regularization_loss = 0
 
-        if layer.weight_regularizer_l1 > 0:
-            regularization_loss += layer.weight_regularizer * np.sum(np.abs(layer.weights))
+        for layer in self.trainable_layers:
+            if layer.weight_regularizer_l1 > 0:
+                regularization_loss += layer.weight_regularizer * np.sum(np.abs(layer.weights))
 
-        if layer.weight_regularizer_l2 > 0:
-            regularization_loss += layer.weight_regularizer_l2 * np.sum(layer.weights * layer.weights)
+            if layer.weight_regularizer_l2 > 0:
+                regularization_loss += layer.weight_regularizer_l2 * np.sum(layer.weights * layer.weights)
 
-        if layer.bias_regularizer_l1 > 0:
-            regularization_loss += layer.bias_regularizer_l1 * np.sum(np.abs(layer.biases))
-        
-        if layer.bias_regularizer_l2 > 0:
-            regularization_loss += layer.bias_regularizer_l2 * np.sum(layer.biases * layer.biases)
+            if layer.bias_regularizer_l1 > 0:
+                regularization_loss += layer.bias_regularizer_l1 * np.sum(np.abs(layer.biases))
+            
+            if layer.bias_regularizer_l2 > 0:
+                regularization_loss += layer.bias_regularizer_l2 * np.sum(layer.biases * layer.biases)
 
         return regularization_loss
+
+    def remember_trainable_layers(self, trainable_layers):
+        self.trainable_layers = trainable_layers
 
     def calculate(self, output, y):
         samples_losses = self.forward(output, y)
         data_loss = np.mean(samples_losses)
 
-        return data_loss
+        return data_loss, self.regularization_loss
 
 class CategoricalCrossentropy(Loss):
     def forward(self, y_pred, y_true):
@@ -62,7 +66,7 @@ class Act_Softmax_Loss_CCentropy():
         self.activation.forward(inputs)
         self.output = self.activation.output
         # Retunera loss
-        return self.loss.calculate(self.out, y_true)
+        return self.loss.calculate(self.output, y_true)
 
     def backward(self, dvalues, y_true):
         samples = len(dvalues)
