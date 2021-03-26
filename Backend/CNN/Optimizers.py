@@ -1,9 +1,6 @@
 import numpy as np
 
-#optimizers används för att förbättra loss resultatet
 class SGD:
-
-    # learning rate sätts till 1 då detta är standard värde för denna optimizer.
     def __init__(self, learning_rate=1., decay=0., momentum = 0.):
         self.learning_rate = learning_rate
         self.current_learning_rate = learning_rate
@@ -16,24 +13,20 @@ class SGD:
             self.current_learning_rate = self.learning_rate * (1. / (1. + self.decay * self.iterations))
     
     def update_params(self, layer):
-        
-        # Om momentum används och inget värde är specificerat i arrayerna fylls vikt och bias arrayerna med nollor
+        # Om momentum används och variabler in finns
         if self.momentum:
-            
+            # Skapa variabler för momentum
             if not hasattr(layer, 'weight_momentums'):
                 layer.weight_momentums = np.zeros_like(layer.weights)
                 layer.bias_momentums = np.zeros_like(layer.biases)
 
 
-            weight_updates = \
-                self.momentum * layer.weight_momentums - self.current_learning_rate * layer.dweights
+            weight_updates = self.momentum * layer.weight_momentums - self.current_learning_rate * layer.dweights
             layer.weight_momentums = weight_updates
 
-            bias_updates = \
-                self.momentum * layer.bias_momentums - self.current_learning_rate * layer.dbiases
+            bias_updates = self.momentum * layer.bias_momentums - self.current_learning_rate * layer.dbiases
             layer.bias_momentums = bias_updates
 
-        # Om momentum inte används
         else:
             weight_updates = -self.current_learning_rate * layer.dweights
             bias_updates = -self.current_learning_rate * layer.dbiases
@@ -46,9 +39,7 @@ class SGD:
 
    
 class Adam:
-    # värdena som initieringen startar med är även dessa standard värden för denna optimizer.
-    def __init__(self, learning_rate = 0.001, decay = 0.,  epsilon=1e-7,
-                 beta_1=0.9, beta_2=0.999):
+    def __init__(self, learning_rate = 0.001, decay = 0.,  epsilon=1e-7, beta_1=0.9, beta_2=0.999):
 
         self.learning_rate = learning_rate
         self.current_learning_rate = learning_rate
