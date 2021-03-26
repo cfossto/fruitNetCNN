@@ -48,6 +48,59 @@ class Dense_layer:
         # Gradient on values
         self.dinputs = np.dot(dvalues, self.weights.T)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Pooling_layer:
     def __init__(self, name, stride=1, size=2):
         self.last_input = None
