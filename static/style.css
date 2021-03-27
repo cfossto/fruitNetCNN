@@ -2,9 +2,15 @@
 
 h1,h2,p { font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif}
 
-header { background-color:lightseagreen; padding: 5%;  }
+h2 { font-size: 90px; color: white; }
 
-.dropper {border: lightslategrey; border-style:dotted; height: 75px; }
+header { background-image: linear-gradient(to right,#20b2aa,white); padding: 5%; }
+.menu { display:inline }
 
 
-footer { padding-left: 3%; }
+.dropperDiv { width: 45%; margin-left: 25%; margin-top: 10%;}
+.dropper {border: 20b2aa; border-style:dotted; padding-left: 40%; padding-right: 25%; padding-top: 8%; padding-bottom: 8%;}
+.descriptionText { margin-top: 10%; text-align: justify; }
+.manualText { margin-top: 5%; font-style: italic; text-align: center;}
+
+footer { position: fixed; bottom:0; padding-left: 3%; }
