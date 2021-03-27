@@ -1,5 +1,5 @@
 import numpy as np
-from Activation_Functions import Softmax
+from activation_Functions import Softmax
 
 class Loss:
 
@@ -83,17 +83,3 @@ class Act_Softmax_Loss_CCentropy():
         self.dinputs[range(samples), y_true] -= 1
         # Normalisera
         self.dinputs = self.dinputs / samples
-        
-class Dropout:
-    def __init__(self, rate):
-        # Dropout rate (rate), procenttal på andel av neuroner som slås av vid varje forward pass
-        self.rate = 1 - rate
-
-    def forward(self, inputs):
-        self.inputs = inputs
-
-        self.binary_mask = np.random.binomial(1, self.rate, size=inputs.shape) / self.rate
-        self.output = inputs * self.binary_mask
-
-    def backward(self, dvalues):
-        self.dinputs = dvalues * self.binary_mask
