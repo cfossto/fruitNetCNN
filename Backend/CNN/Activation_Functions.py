@@ -1,7 +1,7 @@
 import numpy as np
 
 class ReLU:
-    def forward(self, inputs):
+    def forward(self, inputs, training):
         self.inputs = inputs
         self.output = np.maximum(0, inputs)
     
@@ -14,7 +14,8 @@ class ReLU:
         return outputs
 
 class Softmax:
-    def forward(self, inputs):
+    def forward(self, inputs, training):
+        self.inputs = inputs
         # För stora inputs kan skapa overflow när de exponentieras
         # Därmed tas (varje element - största elementet) på raden
         exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
