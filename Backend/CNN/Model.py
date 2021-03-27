@@ -93,9 +93,9 @@ class Model:
             self.softmax_classifier_output.backward(output, y)
             self.layers[-1].dinputs = self.softmax_classifier_output.dinputs
 
-        for layer in reversed(self.layers[:-1]):
-            layer.backward(layer.next.dinputs)
-        return
+            for layer in reversed(self.layers[:-1]):
+                layer.backward(layer.next.dinputs)
+            return
 
         self.loss.backward(output, y)
 

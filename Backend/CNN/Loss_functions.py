@@ -60,16 +60,16 @@ class CategoricalCrossentropy(Loss):
 # Kan i vissa fall göra processen mer effektiv genom att kombinera
 # Softmax Aktivering och Categorical Cross entopy loss
 class Act_Softmax_Loss_CCentropy():
-    def __init__(self):
-        self.activation = Softmax()
-        self.loss = CategoricalCrossentropy()
+    # def __init__(self):
+    #     self.activation = Softmax()
+    #     self.loss = CategoricalCrossentropy()
 
-    def forward(self, inputs, y_true):
-        # output-lagrets aktiverings funktion
-        self.activation.forward(inputs)
-        self.output = self.activation.output
-        # Retunera loss
-        return self.loss.calculate(self.output, y_true)
+    # def forward(self, inputs, y_true):
+    #     # output-lagrets aktiverings funktion
+    #     self.activation.forward(inputs)
+    #     self.output = self.activation.output
+    #     # Retunera loss
+    #     return self.loss.calculate(self.output, y_true)
 
     def backward(self, dvalues, y_true):
         samples = len(dvalues)
