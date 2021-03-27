@@ -1,14 +1,14 @@
 import numpy as np
-from activation_Functions import Softmax
+from Activation_Functions import Softmax
 
 class Loss:
 
-    def regularization_loss(self, layer):
+    def regularization_loss(self):
         regularization_loss = 0
 
         for layer in self.trainable_layers:
             if layer.weight_regularizer_l1 > 0:
-                regularization_loss += layer.weight_regularizer * np.sum(np.abs(layer.weights))
+                regularization_loss += layer.weight_regularizer_l1 * np.sum(np.abs(layer.weights))
 
             if layer.weight_regularizer_l2 > 0:
                 regularization_loss += layer.weight_regularizer_l2 * np.sum(layer.weights * layer.weights)
@@ -31,7 +31,7 @@ class Loss:
         if not include_regularization:
             return data_loss
 
-        return data_loss, self.regularization_loss
+        return data_loss, self.regularization_loss()
 
 class CategoricalCrossentropy(Loss):
     def forward(self, y_pred, y_true):

@@ -1,7 +1,7 @@
 import numpy as np
-from layers import Layer_Input
-from loss_functions import Act_Softmax_Loss_CCentropy, CategoricalCrossentropy, Loss
-from activation_Functions import Softmax
+from Layers import Layer_Input
+from Loss_functions import Act_Softmax_Loss_CCentropy, CategoricalCrossentropy, Loss
+from Activation_Functions import Softmax
 
 
 class Model:
