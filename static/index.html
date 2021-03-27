@@ -30,13 +30,13 @@
         </div> -->
 
         <div id="drop-area">
-            <form class="my-form" action="imageSend" method="POST">
+            <form class="my-form" action="imageSend" method="POST" enctype="multipart/form-data">
               <p>Drop single picture here</p>
               <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
               <div id="gallery"></div>
             </form>
 
-          </div><label class="button" for="fileElem">Select a picture</label> <button class="button">Test</button>
+          <!--<label class="button" for="fileElem">Select a picture</label> <button class="button">Test</button>-->
             
             <p class="descriptionText">PEARnet (Professional Elastic ANN Resource) is a CNN AI service that categorises fruit.
                 It is designed by a team of AI experts at PEARnet Group, with a custom ANN built from bottom up by the team.

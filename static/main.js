@@ -47,7 +47,7 @@ function handleFiles(files) {
   }
 
 function uploadFile(file) {
-    let url = 'YOUR URL HERE'
+    let url = '/imageSend'
     let formData = new FormData()
   
     formData.append('file', file)
