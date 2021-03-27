@@ -14,7 +14,7 @@ class Dense_layer:
         self.br_l1 = br_l1
         self.br_l2 = br_l2
 
-    def forward(self, inputs):
+    def forward(self, inputs, training):
         
         self.inputs = inputs
         # detta är outputsen från nodes
@@ -49,27 +49,26 @@ class Dense_layer:
 
 
 class Conv_layer:
-    def __init__(self, name, filters=16, stride=1, size=3):
-        self.name = name
+    def __init__(self, filters=16, stride=1, kernel_size=3):
         self.filters = np.random.randn(filters, 3, 3) * 0.1
         self.stride = stride
-        self.size = size
+        self.kernel_size = kernel_size
         self.last_input = None
 
-    def forward(self, inputs):
+    def forward(self, inputs, training):
         self.last_input = inputs
         input_dimension = inputs.shape[1]
-        output_dimension = int((input_dimension - self.size) / self.stride) + 1
+        output_dimension = int((input_dimension - self.kernel_size) / self.stride) + 1
         out = np.zeros((self.filters.shape[0], output_dimension, output_dimension))
 
         for i in range(self.filters.shape[0]):
             out_y = 0
             tmp_y = out_y
-            while tmp_y + self.size <= input_dimension:
+            while tmp_y + self.kernel_size <= input_dimension:
                 out_x = 0
                 tmp_x = out_x 
-                while tmp_x + self.size <= input_dimension:
-                    patch = inputs[:, tmp_y:tmp_y + self.size, tmp_x:tmp_x + self.size]
+                while tmp_x + self.kernel_size <= input_dimension:
+                    patch = inputs[:, tmp_y:tmp_y + self.kernel_size, tmp_x:tmp_x + self.kernel_size]
                     out[i, out_y, out_x] += np.sum(self.filters[i] * patch)
                     tmp_x += self.stride
                     out_x += 1
@@ -85,13 +84,13 @@ class Conv_layer:
         for i in range(self.filters.shape[0]):
             out_y = 0
             tmp_y = out_y
-            while tmp_y + self.size <= input_dimension:
+            while tmp_y + self.kernel_size <= input_dimension:
                 out_x = 0
                 tmp_x = out_x
-                while tmp_x + self.size <= input_dimension:
-                    patch = self.last_input[:, tmp_y:tmp_y + self.size, tmp_x:tmp_x + self.size]
+                while tmp_x + self.kernel_size <= input_dimension:
+                    patch = self.last_input[:, tmp_y:tmp_y + self.kernel_size, tmp_x:tmp_x + self.kernel_size]
                     dfilt[i] += np.sum(dvalues[i, out_y, out_x] * patch, axis=0)
-                    doutput[:, tmp_y:tmp_y + self.size, tmp_x:tmp_x + self.size] += dvalues[i, out_y, out_x] * self.filters[i]
+                    doutput[:, tmp_y:tmp_y + self.kernel_size, tmp_x:tmp_x + self.kernel_size] += dvalues[i, out_y, out_x] * self.filters[i]
 
                     tmp_x += self.stride
                     out_x += 1
@@ -109,7 +108,7 @@ class Pooling_layer:
         self.stride = stride
         self.size = size
 
-    def forward(self, inputs):
+    def forward(self, inputs, training):
         self.last_input = inputs
 
         num_channels, h_prev, w_prev = inputs.shape
@@ -166,8 +165,12 @@ class Dropout_layer:
         # Dropout rate (rate), procenttal på andel av neuroner som slås av vid varje forward pass
         self.rate = 1 - rate
 
-    def forward(self, inputs):
+    def forward(self, inputs, training):
         self.inputs = inputs
+
+        if not training:
+            self.output = inputs.copy()
+            return
 
         self.binary_mask = np.random.binomial(1, self.rate, size=inputs.shape) / self.rate
         self.output = inputs * self.binary_mask
@@ -179,5 +182,7 @@ class Dropout_layer:
 # Training bygger på data från föregående lager men första lager
 # har ej ett föregående lager. Hence
 class Layer_Input:
-    def forward(self, inputs):
+    def forward(self, inputs, training):
         self.output = inputs
+
+

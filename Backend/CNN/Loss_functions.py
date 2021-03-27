@@ -1,5 +1,5 @@
 import numpy as np
-from Backend.CNN.Activation_Functions import Softmax
+from Activation_Functions import Softmax
 
 class Loss:
 
@@ -24,9 +24,12 @@ class Loss:
     def remember_trainable_layers(self, trainable_layers):
         self.trainable_layers = trainable_layers
 
-    def calculate(self, output, y):
+    def calculate(self, output, y, *, include_regularization=False):
         samples_losses = self.forward(output, y)
         data_loss = np.mean(samples_losses)
+
+        if not include_regularization:
+            return data_loss
 
         return data_loss, self.regularization_loss
 

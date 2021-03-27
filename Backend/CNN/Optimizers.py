@@ -13,9 +13,9 @@ class SGD:
             self.current_learning_rate = self.learning_rate * (1. / (1. + self.decay * self.iterations))
     
     def update_params(self, layer):
-        # Om momentum används och variabler in finns
+        # If momentum is chosen
         if self.momentum:
-            # Skapa variabler för momentum
+            # Check if layers has params for momentum
             if not hasattr(layer, 'weight_momentums'):
                 layer.weight_momentums = np.zeros_like(layer.weights)
                 layer.bias_momentums = np.zeros_like(layer.biases)
