@@ -21,7 +21,9 @@ def index():
 @app.route("/imageSend",methods=["POST"])
 def image_send():
     print("fired")
-    return "Yes"
+    h = img.animg(request.files)
+        
+    return print(h)
 
 
 

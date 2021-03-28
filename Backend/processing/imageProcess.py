@@ -1,16 +1,6 @@
-from cv2 import cv2
-
-def greeting():
-    hello = "Hello"
-    return hello
-
-
-def process(y):
-    x = y*25
-    return x
-
+import numpy as np
 
 
 def animg(img):
-    sh = cv2.imread(img)
+    sh = np.asarray(img)
     return sh
