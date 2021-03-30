@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
+from flask import Response as response
 from Backend.processing import imageProcess as img
+import cv2
 
 
 
@@ -21,10 +23,10 @@ def index():
 @app.route("/imageSend",methods=["POST"])
 def image_send():
     print("fired")
-    h = img.animg(request.files)
-        
-    return print(h)
-
+    #img.imageprocess(request.data)
+    #return response.json(predicted_image_class)
+    print(cv2.imread(request))
+    return "Ok"
 
 
 if __name__ == "__main__":
