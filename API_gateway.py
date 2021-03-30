@@ -2,8 +2,9 @@ from flask import Flask
 from flask import request
 from flask import Response as response
 from Backend.processing import imageProcess as img
-import cv2
-
+from cv2 import cv2
+import numpy as np
+from PIL import Image
 
 
 app = Flask(__name__,static_folder="static")
@@ -25,7 +26,10 @@ def image_send():
     print("fired")
     #img.imageprocess(request.data)
     #return response.json(predicted_image_class)
-    print(cv2.imread(request))
+    file = request.files['image'].read() ## byte file
+    npimg = np.fromstring(file, np.uint8)
+    img = cv2.imdecode(npimg,cv2.IMREAD_UNCHANGED)
+    print(img)
     return "Ok"
 
 
