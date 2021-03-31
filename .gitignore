@@ -1,5 +1,7 @@
 fruit-360/
 settings.json
+uploads/*
+!uploads/.structureKeep
 
 
 # Byte-compiled / optimized / DLL files
