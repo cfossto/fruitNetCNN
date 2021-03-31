@@ -23,11 +23,10 @@ def index():
 @app.route("/imageSend",methods=["POST"])
 def image_send():
     print("fired")
-    f = request.files["file"]
-    filename = secure_filename(f.filename)
-    the_path = path.join(app.config['UPLOAD_FOLDER'])
-    # f.save(the_path, filename)
-    img.imageprocess("uploads/"+filename)
+    file = request.files["file"]
+    filename = secure_filename(file.filename)
+    file.save(path.join(app.config['UPLOAD_FOLDER'], filename))
+    img.imageprocess("uploads/{}".format(filename))
     return "Ok"
 
 
