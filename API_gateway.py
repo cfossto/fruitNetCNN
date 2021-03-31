@@ -1,14 +1,13 @@
-from flask import Flask
-from flask import request
-from flask import Response as response
+from flask import Flask, request, Response
+from werkzeug.utils import secure_filename
 from Backend.processing import imageProcess as img
-from cv2 import cv2
-import numpy as np
-from PIL import Image
+from os import path
 
 
 app = Flask(__name__,static_folder="static")
 port = 9999
+
+app.config["UPLOAD_FOLDER"] = "uploads"
 
 
 
@@ -24,12 +23,11 @@ def index():
 @app.route("/imageSend",methods=["POST"])
 def image_send():
     print("fired")
-    #img.imageprocess(request.data)
-    #return response.json(predicted_image_class)
-    file = request.files['image'].read() ## byte file
-    npimg = np.fromstring(file, np.uint8)
-    img = cv2.imdecode(npimg,cv2.IMREAD_UNCHANGED)
-    print(img)
+    f = request.files["file"]
+    filename = secure_filename(f.filename)
+    the_path = path.join(app.config['UPLOAD_FOLDER'])
+    # f.save(the_path, filename)
+    img.imageprocess("uploads/"+filename)
     return "Ok"
 
 

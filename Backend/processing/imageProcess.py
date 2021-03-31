@@ -1,12 +1,15 @@
 import numpy as np
+from cv2 import cv2
 
-def imageprocess(img_file):
-    processed_image = np.asarray(img_file)
-    sendToCNN(processed_image)
-    return predicted_image_class
+def imageprocess(path_to_file):
+    processed_image = cv2.imread(path_to_file)
+    print(np.shape(processed_image))
+    return processed_image
+
+imageprocess("uploads/Skarmavbild_2021-03-27_kl._15.44.07.png")
 
 
 
-def sendToCNN(the_array):
+def sendToCNN():
     predicted_image_class = ""
     return predicted_image_class
