@@ -1,7 +1,7 @@
 from flask import Flask, request, Response
 from werkzeug.utils import secure_filename
 from Backend.processing import imageProcess as img
-from os import path
+from os import path, remove
 
 
 app = Flask(__name__,static_folder="static")
@@ -18,8 +18,6 @@ def index():
 
 
 # Route for image dropper
-# Should get an image in the request.
-# Send that image to imageProcess
 @app.route("/imageSend",methods=["POST"])
 def image_send():
     print("fired")
@@ -27,7 +25,15 @@ def image_send():
     filename = secure_filename(file.filename)
     file.save(path.join(app.config['UPLOAD_FOLDER'], filename))
     img.imageprocess("uploads/{}".format(filename))
+    remove("uploads/{}".format(filename))
     return "Ok"
+
+
+@app.route("/metrics",methods=["GET"])
+def metrics():
+    print("Metrics")
+    return "ok"
+
 
 
 if __name__ == "__main__":

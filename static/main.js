@@ -2,8 +2,15 @@ let uploadProgress = []
 let progressBar = document.getElementById('progress-bar')
 
 
-function sendFile(){
-    console.log("works!")
+
+function previewFile(file) {
+  let reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onloadend = function() {
+    let img = document.createElement('img')
+    img.src = reader.result
+    document.getElementById('gallery').appendChild(img)
+  }
 }
 
 let dropArea = document.getElementById('drop-area')
@@ -45,8 +52,8 @@ function handleDrop(e) {
 function handleFiles(files) {
     files = [...files]
     initializeProgress(files.lenght)
-    files.forEach(uploadFile)
     files.forEach(previewFile)
+    files.forEach(uploadFile)
   }
 
 function uploadFile(file, i) {
@@ -72,23 +79,10 @@ function uploadFile(file, i) {
     formData.append('file', file)
     xhr.send(formData)
   
-    fetch(url, {
-      method: 'POST',
-      body: formData
-    })
     .then(updateProgress)
     .catch(() => { /* Error. Inform the user */ })
   }
 
-function previewFile(file) {
-    let reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onloadend = function() {
-      let img = document.createElement('img')
-      img.src = reader.result
-      document.getElementById('gallery').appendChild(img)
-    }
-  }
 
 function initializeProgress(numFiles) {
     progressBar.value = 0
@@ -109,4 +103,3 @@ function progressDone() {
     filesDone++
     progressBar.value = filesDone / filesToDo * 100
   }
-
