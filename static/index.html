@@ -21,15 +21,17 @@
     <form class="my-form" action="imageSend" method="POST" enctype="multipart/form-data">
     <section>
         <div id="drop-area">
-              <p>Drop single picture here</p>
+              
               <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
               <div id="gallery"></div>
-              <p class="manualText"><b>To use this service: Drop a picture on the area above and it will identify which fruit is in the picture.</b></p>
+
+              <p class="fruit-type"> </p>
+              <p class="manualText"><b>To use this service: Drop a picture in this area and it will identify which fruit is in the picture.</b></p>
               <progress id="progress-bar" max=100 value=0></progress>
             </div>
         </section>
         <div id="knappar">
-            <label class="add-picture" for="fileElem">Select a picture</label> 
+            <label class="add-picture" for="fileElem">Upload a picture</label> 
         </div>
     </form>
         

@@ -13,13 +13,23 @@ header { background-image: linear-gradient(to right,#20b2aa,white); padding: 5%;
 
 footer { position: fixed; bottom:0; padding-left: 3%; }
 
+#progress-bar{
+    margin-top: 5%;
+    margin-left: 32%;
+    justify-content: center;
+    align-items: center;
+}
 
+.fruit-type {
+    text-align: justify;
+    vertical-align: right;
+    
 
-
+}
 
 #knappar {
     text-align: center;
-    margin-top: -6%;
+    margin-top:-4%;
 }
 
 #drop-area {
@@ -41,12 +51,16 @@ footer { position: fixed; bottom:0; padding-left: 3%; }
   }
   #gallery {
     margin-top: 10px;
+    align-items: center;
+    margin-left: 21%;
   }
   #gallery img {
-    width: 150px;
+    border-radius: 10px;
+    width:250px;
     margin-bottom: 10px;
     margin-right: 10px;
-    vertical-align: middle;
+    
+    
   }
   .add-picture {
     display: inline-block;
@@ -62,3 +76,53 @@ footer { position: fixed; bottom:0; padding-left: 3%; }
   #fileElem {
     display: none;
   }
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 25%;
+  }
+
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
