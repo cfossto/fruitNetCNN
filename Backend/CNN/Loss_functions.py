@@ -83,3 +83,30 @@ class Act_Softmax_Loss_CCentropy():
         self.dinputs[range(samples), y_true] -= 1
         # Normalisera
         self.dinputs = self.dinputs / samples
+
+class MeanSquaredError(Loss):       # L2 loss
+    def forward(self, y_pred, y_true):
+        sample_losses = np.mean((y_true - y_pred)**2, axis=1)
+        return sample_losses
+    
+    def backward(self, dvalues, y_true):
+        samples = len(dvalues)
+        # outputs per sample, utgår från första index
+        outputs = len(dvalues[0])
+
+        # gradient
+        self.dinputs = -2 * (y_true - dvalues) / outputs
+        # normaliserar gradienterna
+        self.dinputs = self.dinputs / samples
+
+class MeanAbsoluteError(Loss):  # L1 loss
+    def forward(self, y_pred, y_true):
+        samples_losses = np.mean(np.abs(y_true - y_pred), axis=-1)
+        return samples_losses
+
+    def backward(self, dvalues, y_true):
+        samples = len(dvalues)
+        outputs = len(dvalues[0])
+
+        self.dinputs = np.sign(y_true- dvalues) / outputs
+        self.dinputs = self.dinputs / samples

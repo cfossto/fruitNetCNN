@@ -32,3 +32,13 @@ class Softmax:
 
     def predictions(self, outputs):
         return np.argmax(outputs, axis=1)
+
+class Linear:
+    def forward(self, inputs):
+        self.inputs = inputs
+        self.output = inputs
+
+    def backward(self, dvalues):
+        # linjär funktion där x=y; derivatan = 1
+        # 1*dvalues = dvalues (kedjeregeln)
+        self.dinputs = dvalues.copy()
