@@ -30,6 +30,3 @@ def load_model(img_path):
     prediction = model.predict(pic)
     print('label: ', labels[np.argmax(prediction)], 'confidence: ', 100 * np.max(prediction))
     return labels[np.argmax(prediction)]
-
-
-predict_image("/Users/christopherfossto/Desktop/f73547b49eadee36c6346f52a5b4f4fe.jpg")

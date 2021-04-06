@@ -89,6 +89,8 @@ async function uploadFile(file, i) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let response = this.responseText
         console.log(response)
+        let response_to_frontpage = document.querySelector("#gallery")
+        response_to_frontpage.insertAdjacentText("afterend",response)
         // Done. Inform the user
         return response
       }
