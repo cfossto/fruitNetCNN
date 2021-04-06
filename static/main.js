@@ -74,7 +74,7 @@ function handleFiles(files){
 
 
 
-async function uploadFile(file, i) {
+function uploadFile(file, i) {
     let url = '/imageSend'
     var xhr = new XMLHttpRequest()
     let formData = new FormData()
@@ -90,14 +90,12 @@ async function uploadFile(file, i) {
         let response = this.responseText
         console.log(response)
         let response_to_frontpage = document.querySelector("#gallery")
-        response_to_frontpage.insertAdjacentText("afterend",response)
+        response_to_frontpage.insertAdjacentHTML("afterend", `<p class="predict"> ${response} <p>` )
         // Done. Inform the user
-        return response
       }
       else if (xhr.readyState == 4 && xhr.status != 200) {
         // Error. Inform the user
       }
-      return response
     })
   
     formData.append('file', file)

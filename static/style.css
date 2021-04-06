@@ -168,6 +168,9 @@ footer { position: fixed; bottom:0; padding-left: 3%; }
     animation: fadeIn 1s
 }
 
+.predict { background-color: #4CAF50;  } 
+
+
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
