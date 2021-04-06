@@ -7,7 +7,7 @@ import tensorflow as tf
 
 def predict_image(path_to_file):
     pred = load_model(path_to_file)
-    print(pred)
+    print(pred + "Funkish")
     return pred
 
 
@@ -20,7 +20,8 @@ def sendToCNN():
 
 
 def load_model(img_path):
-    model = models.load_model(r"Landscape-model\Landscape-model.h5")
+    model_path = r"F:\Coding\Full Project\Landscape-model\Landscape-model.h5"  # user specific path (local)
+    model = models.load_model(model_path)
 
     labels = ['buildings', 'forest', 'glacier', 'mountain', 'sea', 'street']
 
