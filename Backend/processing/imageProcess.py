@@ -6,9 +6,9 @@ import tensorflow as tf
 
 
 def predict_image(path_to_file):
-    load_model(path_to_file)
-    print(load_model.prediction)
-    return load_model.prediction
+    pred = load_model(path_to_file)
+    print(pred)
+    return pred
 
 
 
