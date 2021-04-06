@@ -1,5 +1,6 @@
 let uploadProgress = []
 let progressBar = document.getElementById('progress-bar')
+let prediction = null
 
 function navfunc() {
   var x = document.getElementById("navMenu");
@@ -64,14 +65,16 @@ function handleDrop(e) {
   handleFiles(files)
 }
 
-function handleFiles(files) {
+function handleFiles(files){
     files = [...files]
     initializeProgress(files.lenght)
     files.forEach(previewFile)
     files.forEach(uploadFile)
   }
 
-function uploadFile(file, i) {
+
+
+async function uploadFile(file, i) {
     let url = '/imageSend'
     var xhr = new XMLHttpRequest()
     let formData = new FormData()
@@ -93,11 +96,11 @@ function uploadFile(file, i) {
   
     formData.append('file', file)
     xhr.send(formData)
+
   
     .then(updateProgress)
     .catch(() => { /* Error. Inform the user */ })
   }
-
 
 function initializeProgress(numFiles) {
     progressBar.value = 0

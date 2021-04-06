@@ -1,8 +1,7 @@
-from flask import Flask, request, Response
+from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from Backend.processing import imageProcess as img
 from os import path, remove
-
 
 app = Flask(__name__,static_folder="static")
 port = 9999
@@ -26,8 +25,7 @@ def image_send():
     file.save(path.join(app.config['UPLOAD_FOLDER'], filename))
     pred_to_front = img.predict_image("uploads/{}".format(filename))
     remove("uploads/{}".format(filename))
-    Response.json(pred_to_front)
-    return "Ok"
+    return pred_to_front
 
 
 @app.route("/metrics",methods=["GET"])

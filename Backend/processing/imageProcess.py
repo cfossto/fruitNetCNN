@@ -1,13 +1,12 @@
 import numpy as np
-from tensorflow.python.keras import layers, models, Model, optimizers
 import numpy as np
 import tensorflow as tf
-
+from tensorflow.keras import layers, models, Model, optimizers
 
 
 def predict_image(path_to_file):
     pred = load_model(path_to_file)
-    print(pred + "Funkish")
+    print(pred + " Funkish")
     return pred
 
 
@@ -20,7 +19,7 @@ def sendToCNN():
 
 
 def load_model(img_path):
-    model_path = r"F:\Coding\Full Project\Landscape-model\Landscape-model.h5"  # user specific path (local)
+    model_path = r"/Users/christopherfossto/Desktop/Landscape-model.h5"  # user specific path (local)
     model = models.load_model(model_path)
 
     labels = ['buildings', 'forest', 'glacier', 'mountain', 'sea', 'street']
@@ -30,4 +29,7 @@ def load_model(img_path):
     pic = tf.expand_dims(pic, 0)
     prediction = model.predict(pic)
     print('label: ', labels[np.argmax(prediction)], 'confidence: ', 100 * np.max(prediction))
-    return prediction
+    return labels[np.argmax(prediction)]
+
+
+predict_image("/Users/christopherfossto/Desktop/f73547b49eadee36c6346f52a5b4f4fe.jpg")
