@@ -24,8 +24,9 @@ def image_send():
     file = request.files["file"]
     filename = secure_filename(file.filename)
     file.save(path.join(app.config['UPLOAD_FOLDER'], filename))
-    img.imageprocess("uploads/{}".format(filename))
+    pred_to_front = img.predict_image("uploads/{}".format(filename))
     remove("uploads/{}".format(filename))
+    Response.json(pred_to_front)
     return "Ok"
 
 
