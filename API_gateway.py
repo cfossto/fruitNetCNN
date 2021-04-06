@@ -25,7 +25,7 @@ def image_send():
     file.save(path.join(app.config['UPLOAD_FOLDER'], filename))
     pred_to_front = img.predict_image("uploads/{}".format(filename))
     remove("uploads/{}".format(filename))
-    return pred_to_front
+    return jsonify(pred_to_front)
 
 
 @app.route("/metrics",methods=["GET"])

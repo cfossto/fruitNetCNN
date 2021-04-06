@@ -1,6 +1,6 @@
 let uploadProgress = []
 let progressBar = document.getElementById('progress-bar')
-let prediction = null
+
 
 function navfunc() {
   var x = document.getElementById("navMenu");
@@ -87,11 +87,15 @@ async function uploadFile(file, i) {
   
     xhr.addEventListener('readystatechange', function(e) {
       if (xhr.readyState == 4 && xhr.status == 200) {
+        let response = this.responseText
+        console.log(response)
         // Done. Inform the user
+        return response
       }
       else if (xhr.readyState == 4 && xhr.status != 200) {
         // Error. Inform the user
       }
+      return response
     })
   
     formData.append('file', file)
@@ -121,3 +125,5 @@ function progressDone() {
     filesDone++
     progressBar.value = filesDone / filesToDo * 100
   }
+
+
