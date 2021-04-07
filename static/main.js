@@ -89,7 +89,7 @@ function uploadFile(file, i) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let response = this.responseText
         console.log(response)
-        document.querySelector("#myPopup").insertAdjacentHTML("beforeend",`<p>${response}</p>`)
+        document.querySelector("#myPopup").insertAdjacentHTML("beforeend",`<p>This is a ${response}</p>`)
         answer_cnn()
         // Done. Inform the user
       }
