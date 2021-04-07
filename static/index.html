@@ -9,15 +9,15 @@
     <title>ESCAPEnet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="nav" id="navMenu">
-  <a href="#home" class="active">AI</a>
-  <!--<a href="#news">Stats</a>-->
-  <a href="javascript:void(0);" class="icon" onclick="nav_func()">
-    <i class="fa fa-bars"></i>
-  </a>
-</div>
 </head>
 <body>
+    <div class="nav" id="navMenu">
+      <a href="#home" class="active">AI</a>
+      <!--<a href="#news">Stats</a>-->
+      <a href="javascript:void(0);" class="icon" onclick="nav_func()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
     <header>
         <h2>ESCAPEnet</h2>
         <p class="descriptionText">ESCAPEnet is a CNN AI service that categorises landscapes.
@@ -33,7 +33,6 @@
               
               <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
               <div id="gallery"></div>
-
               <p class="fruit-type"> </p>
               <p class="manualText"><b>To use this service: Drop a picture in this area and it will identify which kind of landscape is in the picture.</b></p>
               <progress id="progress-bar" max=100 value=0></progress>

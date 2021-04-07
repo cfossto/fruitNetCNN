@@ -18,6 +18,7 @@ function previewFile(file) {
   reader.onloadend = function() {
     let img = document.createElement('img')
     img.src = reader.result
+    document.getElementById("gallery").insertAdjacentHTML("beforeend", "<div class='popup' onclick='answer_cnn()'>         <span class='popuptext' id='myPopup'></span></div>")
     document.getElementById('gallery').appendChild(img)
   }
 }
@@ -88,10 +89,8 @@ function uploadFile(file, i) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         let response = this.responseText
         console.log(response)
-        let response_to_frontpage = document.querySelector("#gallery")
+        document.querySelector("#myPopup").insertAdjacentHTML("beforeend",`<p>${response}</p>`)
         answer_cnn()
-        document.getElementById("gallery").insertAdjacentHTML("beforeend", "<div class='popup'>what is this<span class='popuptext' id='myPopup'>This should be a fruit</span></div>")
-        // response_to_frontpage.insertAdjacentHTML("afterend", `<p class="predict"> ${response} <p>` )
         // Done. Inform the user
       }
       else if (xhr.readyState == 4 && xhr.status != 200) {
