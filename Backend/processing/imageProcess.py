@@ -6,7 +6,7 @@ from tensorflow.keras import layers, models, Model, optimizers
 
 def predict_image(path_to_file):
     pred = load_model(path_to_file)
-    print(pred + " Funkish")
+    print(pred)
     return pred
 
 
@@ -22,7 +22,7 @@ def load_model(img_path):
     model_path = r"/Users/christopherfossto/Desktop/Landscape-model.h5"  # user specific path (local)
     model = models.load_model(model_path)
 
-    labels = ['buildings', 'forest', 'glacier', 'mountain', 'sea', 'street']
+    labels = ['building', 'forest', 'glacier', 'mountain', 'sea', 'street']
 
     pic = tf.keras.preprocessing.image.load_img(img_path, target_size=(150,150))
     pic = tf.keras.preprocessing.image.img_to_array(pic)
