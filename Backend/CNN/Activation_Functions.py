@@ -33,6 +33,17 @@ class Softmax:
     def predictions(self, outputs):
         return np.argmax(outputs, axis=1)
 
+class Sigmoid:
+    def forward(self, inputs, training):
+        self.inputs = inputs
+        self.output = 1 / (1 + np.exp(-inputs))
+
+    def backward(self, dvalues):
+        self.dinputs = dvalues * (1 - self.output) * self.output
+
+    def predictions(self, outputs):
+        return (otputs > 0.5) * 1 
+
 class Linear:
     def forward(self, inputs):
         self.inputs = inputs
@@ -42,3 +53,6 @@ class Linear:
         # linjär funktion där x=y; derivatan = 1
         # 1*dvalues = dvalues (kedjeregeln)
         self.dinputs = dvalues.copy()
+
+    def predictions(self, outputs):
+        return outputs
