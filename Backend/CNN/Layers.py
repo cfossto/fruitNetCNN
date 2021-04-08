@@ -15,7 +15,6 @@ class Dense_layer:
         self.bias_regularizer_l2 = bias_regularizer_l2
 
     def forward(self, inputs, training):
-        
         self.inputs = inputs
         # detta är outputsen från nodes
         self.output = np.dot(inputs, self.weights) + self.biases

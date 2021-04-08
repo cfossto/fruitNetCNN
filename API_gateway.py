@@ -28,11 +28,6 @@ def image_send():
     return jsonify(pred_label, str(pred_conf))
 
 
-@app.route("/metrics",methods=["GET"])
-def metrics():
-    print("Metrics")
-    return "ok"
-
 
 
 if __name__ == "__main__":

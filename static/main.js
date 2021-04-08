@@ -2,15 +2,6 @@ let uploadProgress = []
 let progressBar = document.getElementById('progress-bar')
 
 
-function navfunc() {
-  var x = document.getElementById("navMenu");
-  if (x.className === "nav") {
-    x.className += " responsive";
-  } else {
-    x.className = "nav";
-  }
-}
-
 
 function previewFile(file) {
   let reader = new FileReader()
