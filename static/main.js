@@ -87,10 +87,11 @@ function uploadFile(file, i) {
   
     xhr.addEventListener('readystatechange', function(e) {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        let response = this.responseText
+        let response = JSON.parse(this.responseText)
         console.log(response)
-        document.querySelector("#myPopup").insertAdjacentHTML("beforeend",`<p>This is a ${response}</p>`)
+        document.querySelector("#myPopup").insertAdjacentHTML("beforeend",`<p>This is a ${response.prediction}</p>`)
         answer_cnn()
+        document.querySelector("#gallery").insertAdjacentHTML("afterend",`<p>We are  ${response.confidence}% certain`)
         // Done. Inform the user
       }
       else if (xhr.readyState == 4 && xhr.status != 200) {

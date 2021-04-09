@@ -28,5 +28,6 @@ def load_model(img_path):
     pic = tf.keras.preprocessing.image.img_to_array(pic)
     pic = tf.expand_dims(pic, 0)
     prediction = model.predict(pic)
+    confidence = 100 * np.max(prediction)
     print('label: ', labels[np.argmax(prediction)], 'confidence: ', 100 * np.max(prediction))
-    return labels[np.argmax(prediction)]
+    return labels[np.argmax(prediction)],confidence
