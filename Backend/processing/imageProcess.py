@@ -2,6 +2,7 @@ import numpy as np
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import layers, models, Model, optimizers
+from os import path
 
 
 def predict_image(path_to_file):
@@ -19,7 +20,7 @@ def sendToCNN():
 
 
 def load_model(img_path):
-    model_path = r"/Users/christopherfossto/Desktop/Landscape-model.h5"  # user specific path (local)
+    model_path = Backend.Landscape-model.h5 # User Specific Path!
     model = models.load_model(model_path)
 
     labels = ['building', 'forest', 'glacier', 'mountain', 'sea', 'street']
